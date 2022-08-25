@@ -112,7 +112,7 @@ app.post("/register",async function (request, response) {
 app.post("/", async function (request, response) {
   try {
     const connection = await mongoClient.connect(URL);
-    const db = connection.db("bookMyShow");
+    const db = connection.db("bookshow");
     const user = await db
       .collection("users")
       .findOne({ username: request.body.username });
@@ -175,7 +175,7 @@ app.get("/admin",async function (request, response) {
 app.get("/dashboard", authenticateUser, async function (request, response) {
   try {
     const connection = await mongoClient.connect(URL);
-    const db = connection.db("bookMyShow");
+    const db = connection.db("bookshow");
     let movies = await db.collection("movies").find().toArray();
     
     await connection.close();
@@ -188,7 +188,7 @@ app.get("/dashboard", authenticateUser, async function (request, response) {
 app.put("/admin/:id", authenticateAdmin, async function (req, res) {
   try {
     const connection = await mongoClient.connect(URL);
-    const db = connection.db("bookMyShow");
+    const db = connection.db("bookshow");
     await db
       .collection("movies")
       .updateOne({ _id: mongodb.ObjectId(req.params.id) }, { $set: req.body });
