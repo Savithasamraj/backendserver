@@ -10,7 +10,7 @@ const URL = process.env.db;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://book-pearl.vercel.app",
   })
 );
 let authenticate = function (request, response, next) {
@@ -172,7 +172,7 @@ app.get("/admin",async function (request, response) {
     console.log(error);
   }
 });
-app.get("/dashboard", authenticateUser, async function (request, response) {
+app.get("/dashboard", async function (request, response) {
   try {
     const connection = await mongoClient.connect(URL);
     const db = connection.db("bookshow");
