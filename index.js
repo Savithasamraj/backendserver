@@ -10,7 +10,7 @@ const URL = process.env.db;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://book-pearl.vercel.app",
+    origin: "*",
   })
 );
 let authenticate = function (request, response, next) {
@@ -122,7 +122,7 @@ app.post("/", async function (request, response) {
       if (match) {
         //Token
         const token = jwt.sign(
-          { id: user._id, username: user.username, role: user.role },
+          { id: user._id, username: user.username },
           process.env.SECRET
         );
 
